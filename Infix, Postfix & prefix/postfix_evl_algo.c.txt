@@ -1,0 +1,22 @@
+algo of evaluate a postfix expression
+--------------------------------------
+1. Create an array stack[] to store operands.
+2.  Scan the postfix expression from left to right:
+	->  the current character is an operand, 
+		push it onto the stack.
+3. If it is an operator, 
+		do the "process"
+4. At the end, the stack contains only one value, 
+	which is the final result.
+	
+	
+	
+-------------------------------------------
+Postfix Expression: "53+82-*"
+Equivalent Infix Expression: (5 + 3) * (8 - 2)
+
+62/31-* ? (6 / 2) * (3 - 1) =6
+562+* ? (5 * (6 + 2)) = 40
+
+123*+45/- ? ((1 + (2 * 3)) - (4 / 5)) = 7
+921*-8+ ? (9 - (2 * 1)) + 8 = 15

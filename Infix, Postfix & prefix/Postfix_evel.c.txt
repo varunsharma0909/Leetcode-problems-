@@ -1,0 +1,61 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <ctype.h>
+#define MAX 100  // Maximum stack size
+
+int stack[MAX];  
+int top = -1;    
+// Function to push an element onto the stack
+void push(int value) {
+    if (top == MAX - 1) { 
+        printf("Stack Overflow\n");
+        exit(1); 
+    }
+    stack[++top] = value;
+}
+
+// Function to pop an element from the stack
+int pop() {
+    if (top == -1) {
+        printf("Stack Underflow\n");
+        exit(1);
+    }
+    return stack[top--];
+}
+
+// Function to evaluate a postfix expression
+int evaluatePostfix(char *expr) {
+	int i;
+    for (i = 0; expr[i] != '\0'; i++) {
+        // If the character is a digit, push it onto the stack
+        if (isdigit(expr[i])) {
+            push(expr[i] - '0');  // Convert char to int
+        }
+        // If the character is an operator, pop two elements and apply the operation
+        else {
+            int op2 = pop();
+            int op1 = pop();
+            
+            switch (expr[i]) {
+                case '+': push(op1 + op2); break;
+                case '-': push(op1 - op2); break;
+                case '*': push(op1 * op2); break;
+                case '/': push(op1 / op2); break; 
+            }
+        }
+    }
+    return pop();  // Final result
+}
+
+// Driver function
+int main() {
+    char expr[] = "123*+45/";  // Equivalent to (5 + 3) * (8 - 2) = 48
+    printf("Result: %d\n", evaluatePostfix(expr));
+    return 0;
+}
+
+
+
+
+
+
